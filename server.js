@@ -14,35 +14,45 @@ var PORT = process.env.PORT || 3000;
 
 // Star Wars Characters (DATA)
 // =============================================================
-var yoda = {
+let yoda = {
     routeName: "yoda",
     name: "Yoda",
     role: "Jedi Master",
     age: 900,
     forcePoints: 2000
   };
-var darthmaul = {
+let darthmaul = {
     routeName: "darthmaul",
     name: "Darth Maul",
     role: "Sith Lord",
     age: 200,
     forcePoints: 1200
   };
+let obiwan = {
+  routeName: "obiwan",
+  name: "Obi-Wan Kenobi",
+  role: "Jedi Master",
+  forcePoints: 1800
+};
 
 // Routes
 // =============================================================
 
 // Basic route that sends the user first to the AJAX Page
-app.get("/", function(req, res) {
+app.get("/", (req, res) => {
   res.send("Welcome to the Star Wars Page!");
 });
 
-app.get("/yoda", function(req, res) {
+app.get("/yoda", (req, res) => {
   res.json(yoda);
 });
 
-app.get("/darthmaul", function(req, res) {
+app.get("/darthmaul", (req, res) => {
   res.json(darthmaul);
+});
+
+app.get("/obiwan", (req, res) => {
+  res.json(obiwan);
 });
 
 // Displays all characters
