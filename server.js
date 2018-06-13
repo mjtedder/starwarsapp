@@ -14,26 +14,27 @@ var PORT = process.env.PORT || 3000;
 
 // Star Wars Characters (DATA)
 // =============================================================
-let yoda = {
+let characters = [{
     routeName: "yoda",
     name: "Yoda",
     role: "Jedi Master",
     age: 900,
     forcePoints: 2000
-  };
-let darthmaul = {
+  },
+  {
     routeName: "darthmaul",
     name: "Darth Maul",
     role: "Sith Lord",
     age: 200,
     forcePoints: 1200
-  };
-let obiwan = {
-  routeName: "obiwan",
-  name: "Obi-Wan Kenobi",
-  role: "Jedi Master",
-  forcePoints: 1800
-};
+  },
+  {
+    routeName: "obiwan",
+    name: "Obi-Wan Kenobi",
+    role: "Jedi Master",
+    forcePoints: 1800
+  }
+];
 
 // Routes
 // =============================================================
@@ -43,33 +44,44 @@ app.get("/", (req, res) => {
   res.send("Welcome to the Star Wars Page!");
 });
 
-app.get("/yoda", (req, res) => {
-  res.json(yoda);
-});
-
-app.get("/darthmaul", (req, res) => {
-  res.json(darthmaul);
-});
-
-app.get("/obiwan", (req, res) => {
-  res.json(obiwan);
-});
-
 // Displays all characters
+app.get("/api/:characters?", (req, res) => {
+
+  let chosen = req.params.characters;
+
+  if (chosen) {
+
+    console.log(chosen);
+
+    for (let i = 0; i < characters.length; i++) {
+      if (chosen === characters[i].routeName) {
+        res.json(characters[i]);
+        return;
+      }
+    }
+    res.send("No character found.");
+
+  } else {
+
+    res.json(characters);
+  }
+
+});
+
 
 // Displays a single character, or returns false
 
 // Create New Characters - takes in JSON input
 
-  // req.body hosts is equal to the JSON post sent from the user
-  // This works because of our body-parser middleware
+// req.body hosts is equal to the JSON post sent from the user
+// This works because of our body-parser middleware
 
 
-  // Using a RegEx Pattern to remove spaces from newCharacter
-  // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
+// Using a RegEx Pattern to remove spaces from newCharacter
+// You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
 
 // Starts the server to begin listening
 // =============================================================
-app.listen(PORT, function() {
+app.listen(PORT, function () {
   console.log("App listening on PORT " + PORT);
 });
