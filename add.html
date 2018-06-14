@@ -64,6 +64,7 @@
 
   <script type="text/javascript">
     // Question: What does this code do?
+    //When button is clicked, creates a new JSON object for data entered for new character.
     $("#add-btn").on("click", function(event) {
       event.preventDefault();
       var newCharacter = {
@@ -74,6 +75,7 @@
       };
 
       // Question: What does this code do??
+      // Answer: The magic that connects back-end to front-end.
       $.post("/api/characters", newCharacter)
         .then(function(data) {
           console.log("add.html", data);
